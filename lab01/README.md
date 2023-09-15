@@ -133,8 +133,7 @@ encapsulation dot1Q 4
 ip address 192.168.4.1 255.255.255.0  
 
 int Gi0/1.8  
-encapsulation dot1Q 8 native  
-ip address 192.168.4.1 255.255.255.0   
+encapsulation dot1Q 8 native   
 
 Маршрутизация включается командой: **ip routing**  
 
