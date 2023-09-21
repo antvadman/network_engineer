@@ -86,7 +86,7 @@ S3
 Свитч S1 является корневым мостом.  
 Свитч S1 обладает минимальным Bridge ID (в частности минимальным МАС-адресом).  
 S1 - все порты Designated  
-S2 - Gi0/1 Alternate, Gi0/3 Designated  
+S2 - Gi0/1 Alternate, Gi0/3 Root  
 S3 - Gi0/1 Root, Gi0/3 Designated  
 
 Изменяем стоимость порта Gi0/3 на свитче S2:
