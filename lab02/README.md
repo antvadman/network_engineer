@@ -90,6 +90,7 @@ S2 - Gi0/1 Alternate, Gi0/3 Root
 S3 - Gi0/1 Root, Gi0/3 Designated  
 
 Порт Gi0/1 S2 заблокировался, по следующей причине: порты Gi0/3 S3 и Gi0/1 S2 имеют одинаковую RPC, сл-но, сравниваем BID. У S3 BID меньше, слн-но, его порт Gi0/3 в Designated, а Gi0/1 у S2 в Blocked.  
+Для S3 аналогично.  
 
 Изменяем стоимость порта Gi0/3 на свитче S2:
 **interface Gi0/3**  
