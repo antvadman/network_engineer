@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lab name="lab03v4" version="1" scripttimeout="300" lock="0">
+  <topology>
+    <nodes>
+      <node id="1" name="R1" type="qemu" template="vios" image="vios-adventerprisek9-m.SPA.159-3.M2" console="telnet" cpu="1" cpulimit="0" ram="1024" ethernet="4" uuid="1df54ee5-07fc-4e4f-80b3-60f38f441f05" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc -cpu host" qemu_version="2.12.0" qemu_arch="x86_64" delay="0" icon="Router.png" config="0" left="474" top="237">
+        <interface id="0" name="Gi0/0" type="ethernet" network_id="1"/>
+        <interface id="1" name="Gi0/1" type="ethernet" network_id="2"/>
+      </node>
+      <node id="2" name="R2" type="qemu" template="vios" image="vios-adventerprisek9-m.SPA.159-3.M2" console="telnet" cpu="1" cpulimit="0" ram="1024" ethernet="4" uuid="254493de-1a1e-47ab-992f-76f8cfe8e16d" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc -cpu host" qemu_version="2.12.0" qemu_arch="x86_64" delay="0" icon="Router.png" config="0" left="741" top="237">
+        <interface id="0" name="Gi0/0" type="ethernet" network_id="1"/>
+        <interface id="1" name="Gi0/1" type="ethernet" network_id="3"/>
+      </node>
+      <node id="3" name="S1" type="qemu" template="viosl2" image="viosl2-adventerprisek9-m.cml.SSA.high_iron_20190423" console="telnet" cpu="1" cpulimit="0" ram="1024" ethernet="8" uuid="be57a52d-1675-4ace-a908-1cba421d4f4b" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc -cpu host" qemu_version="2.12.0" qemu_arch="x86_64" delay="0" icon="Switch.png" config="0" left="468" top="405">
+        <interface id="0" name="Gi0/0" type="ethernet" network_id="4"/>
+        <interface id="1" name="Gi0/1" type="ethernet" network_id="2"/>
+      </node>
+      <node id="4" name="S2" type="qemu" template="viosl2" image="viosl2-adventerprisek9-m.cml.SSA.high_iron_20190423" console="telnet" cpu="1" cpulimit="0" ram="1024" ethernet="8" uuid="966df74c-dba4-4188-873d-6dcda0fd06c8" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc -cpu host" qemu_version="2.12.0" qemu_arch="x86_64" delay="0" icon="Switch.png" config="0" left="735" top="405">
+        <interface id="0" name="Gi0/0" type="ethernet" network_id="5"/>
+        <interface id="1" name="Gi0/1" type="ethernet" network_id="3"/>
+      </node>
+      <node id="5" name="VPCA" type="vpcs" template="vpcs" image="" ethernet="1" delay="0" icon="Desktop.png" config="0" left="372" top="480">
+        <interface id="0" name="eth0" type="ethernet" network_id="4"/>
+      </node>
+      <node id="6" name="VPCB" type="vpcs" template="vpcs" image="" ethernet="1" delay="0" icon="Desktop.png" config="0" left="846" top="489">
+        <interface id="0" name="eth0" type="ethernet" network_id="5"/>
+      </node>
+    </nodes>
+    <networks>
+      <network id="1" type="bridge" name="Net-R2iface_0" left="456" top="232" visibility="0"/>
+      <network id="2" type="bridge" name="Net-S1iface_1" left="456" top="195" visibility="0"/>
+      <network id="3" type="bridge" name="Net-S2iface_1" left="518" top="289" visibility="0"/>
+      <network id="4" type="bridge" name="Net-VPCAiface_0" left="243" top="401" visibility="0"/>
+      <network id="5" type="bridge" name="Net-VPCBiface_0" left="384" top="190" visibility="0"/>
+    </networks>
+  </topology>
+</lab>
