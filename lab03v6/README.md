@@ -109,7 +109,7 @@ R2(config-if)# ipv6 dhcp relay destination 2001:db8:acad:2::1 gi0/0
 
 ## Полезные ссылки
 
-[Файл лабораторной работы](./lab03v6.unl)  
+[Файл лабораторной работы](./lab3v6.unl)  
 
 
 
