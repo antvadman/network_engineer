@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lab name="lab3v6" version="1" scripttimeout="300" lock="0">
+  <topology>
+    <nodes>
+      <node id="1" name="R1" type="qemu" template="vios" image="vios-adventerprisek9-m.SPA.159-3.M2" console="telnet" cpu="1" cpulimit="0" ram="1024" ethernet="4" uuid="33e0fc3f-f2e7-4bd5-8f0f-c9f1177432aa" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc -cpu host" qemu_version="2.12.0" qemu_arch="x86_64" delay="0" icon="Router.png" config="0" left="402" top="198">
+        <interface id="0" name="Gi0/0" type="ethernet" network_id="1"/>
+        <interface id="1" name="Gi0/1" type="ethernet" network_id="2"/>
+      </node>
+      <node id="2" name="R2" type="qemu" template="vios" image="vios-adventerprisek9-m.SPA.159-3.M2" console="telnet" cpu="1" cpulimit="0" ram="1024" ethernet="4" uuid="5f1dbe66-c977-4b23-9da3-dfef563e045f" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc -cpu host" qemu_version="2.12.0" qemu_arch="x86_64" delay="0" icon="Router.png" config="0" left="606" top="198">
+        <interface id="0" name="Gi0/0" type="ethernet" network_id="1"/>
+        <interface id="1" name="Gi0/1" type="ethernet" network_id="3"/>
+      </node>
+      <node id="3" name="S1" type="qemu" template="viosl2" image="viosl2-adventerprisek9-m.cml.SSA.high_iron_20190423" console="telnet" cpu="1" cpulimit="0" ram="1024" ethernet="8" uuid="dcc6f9db-6906-42d5-a1d2-d46c4fd3382d" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc -cpu host" qemu_version="2.12.0" qemu_arch="x86_64" delay="0" icon="Switch L3.png" config="0" left="396" top="324">
+        <interface id="0" name="Gi0/0" type="ethernet" network_id="4"/>
+        <interface id="1" name="Gi0/1" type="ethernet" network_id="2"/>
+      </node>
+      <node id="4" name="S2" type="qemu" template="viosl2" image="viosl2-adventerprisek9-m.cml.SSA.high_iron_20190423" console="telnet" cpu="1" cpulimit="0" ram="1024" ethernet="8" uuid="72a9dd11-3eb8-4582-8eb8-e0f0a5542796" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc -cpu host" qemu_version="2.12.0" qemu_arch="x86_64" delay="0" icon="Switch L3.png" config="0" left="603" top="330">
+        <interface id="0" name="Gi0/0" type="ethernet" network_id="5"/>
+        <interface id="1" name="Gi0/1" type="ethernet" network_id="3"/>
+      </node>
+      <node id="5" name="SRV1" type="qemu" template="winserver" image="winserver-S2012-R2-x64-rev3" console="vnc" cpu="1" cpulimit="0" ram="8192" ethernet="1" uuid="cf3238d7-2de5-4f93-852e-723bacf65cf9" qemu_options="-machine type=pc,accel=kvm -cpu host,+fsgsbase -vga std -usbdevice tablet -boot order=dc -drive file=/opt/qemu/share/qemu/virtio-win-drivers.img,index=1,if=floppy,readonly" qemu_version="4.1.0" qemu_arch="x86_64" delay="0" icon="Server.png" config="0" left="396" top="471">
+        <interface id="0" name="e0" type="ethernet" network_id="4"/>
+      </node>
+      <node id="6" name="SRV2" type="qemu" template="winserver" image="winserver-S2012-R2-x64-rev3" console="vnc" cpu="1" cpulimit="0" ram="8192" ethernet="1" uuid="42b6f570-77b8-4e7f-8c7a-3f51b20fdd97" qemu_options="-machine type=pc,accel=kvm -cpu host,+fsgsbase -vga std -usbdevice tablet -boot order=dc -drive file=/opt/qemu/share/qemu/virtio-win-drivers.img,index=1,if=floppy,readonly" qemu_version="4.1.0" qemu_arch="x86_64" delay="0" icon="Server.png" config="0" left="606" top="462">
+        <interface id="0" name="e0" type="ethernet" network_id="5"/>
+      </node>
+    </nodes>
+    <networks>
+      <network id="1" type="bridge" name="Net-R2iface_0" left="311" top="303" visibility="0"/>
+      <network id="2" type="bridge" name="Net-S1iface_1" left="349" top="340" visibility="0"/>
+      <network id="3" type="bridge" name="Net-S2iface_1" left="660" top="344" visibility="0"/>
+      <network id="4" type="bridge" name="Net-SRV1iface_0" left="316" top="231" visibility="0"/>
+      <network id="5" type="bridge" name="Net-SRV2iface_0" left="366" top="420" visibility="0"/>
+    </networks>
+  </topology>
+</lab>
