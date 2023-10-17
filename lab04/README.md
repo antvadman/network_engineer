@@ -53,19 +53,38 @@ interface Vlan20
 Таким образом трафик каждого VLAN будет проходить по своему одному виртуальному линку:по e0/0.10 будет ходить трафик VLAN 10, а по e0/1.20 трафик VLAN 20.
 
 
-#### R12, 13
+#### R12
  ```
- interface Ethernet0/0.10  
- encapsulation dot1Q 10  
- ip address 192.168.0.252 255.255.255.0  
- vrrp 100 ip 192.168.0.254  
+ interface Ethernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.0.252 255.255.255.0
+ vrrp 100 ip 192.168.0.254
+ vrrp 100 priority 120
 
-interface Ethernet0/1.20  
- encapsulation dot1Q 20  
- ip address 192.168.1.252 255.255.255.0  
- vrrp 100 ip 192.168.1.254  
+interface Ethernet0/1.20
+ encapsulation dot1Q 20
+ ip address 192.168.1.252 255.255.255.0
+ no vrrp 100 preempt
+ vrrp 200 ip 192.168.1.254
+ vrrp 200 priority 99
  ```
  
+#### R13
+``` 
+interface Ethernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.0.253 255.255.255.0
+ vrrp 100 ip 192.168.0.254
+ vrrp 100 priority 99
+
+interface Ethernet0/1.20
+ encapsulation dot1Q 20
+ ip address 192.168.1.253 255.255.255.0
+ vrrp 200 ip 192.168.1.254
+ vrrp 200 priority 120
+``` 
+
+
 #### Таблица адресации для офиса Москва
 |     Хост     |  Адрес                 | Интерфейс         |
 |--------------|------------------------|-------------------| 
