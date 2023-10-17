@@ -64,7 +64,6 @@ interface Vlan20
 interface Ethernet0/1.20
  encapsulation dot1Q 20
  ip address 192.168.1.252 255.255.255.0
- no vrrp 100 preempt
  vrrp 200 ip 192.168.1.254
  vrrp 200 priority 99
  ```
