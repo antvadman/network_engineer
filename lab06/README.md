@@ -1,7 +1,7 @@
 # Lab 06 OSPF
 
 ### Топология сети
-<image src="scheme.png">
+<image src="scheme.jpg">
 
 Задачи лабораторной работы:  
 
@@ -77,40 +77,53 @@ C        19.19.19.19 is directly connected, Loopback0
 ```
 network 10.0.3.0 0.0.0.3 area 102
 ```
-Здесь будем фильтровать маршруты.  
-Создаем ACL, которым будем матчить сети, маршруты до которых мы будем отфильтровывать.  
+Здесь будем фильтровать маршруты. 
+Создаем префикс-лист, запрещаем сеть 10.0.2.0/30, запрещаем маршрут по умолчанию, чтобы сеть 10.0.2.0/30 не была доступна через дефолт и разрешаем более узкие сети.  
 ```
-access-list 1 deny   10.0.2.0 0.0.0.3
-access-list 1 permit any
+ip prefix-list F101 seq 10 deny 10.0.2.0/30
+ip prefix-list F101 seq 20 deny 0.0.0.0/0
+ip prefix-list F101 seq 30 permit 0.0.0.0/0 le 32
 ```
-Далее создаем distribute list, в котором будем ссылаться на ACL  
+Далее применяем созданый префикс-лист:  
 ```
-distribute-list 1 in
+router ospf 1
+ distribute-list prefix F101 in
 ```
-Так выгладела ТМ до фильтрации, пинг в зону 101 проходит  
+Теперь в таблице маршрутизации отсутствует сеть 10.0.2.0/30 и дефолт:  
 ```
-      10.0.0.0/8 is variably subnetted, 5 subnets, 3 masks
-O IA     10.0.0.0/29 [110/20] via 10.0.3.2, 00:00:08, Ethernet0/0
-O IA     10.0.1.0/29 [110/20] via 10.0.3.2, 00:00:08, Ethernet0/0
-O IA     10.0.2.0/30 [110/40] via 10.0.3.2, 00:00:08, Ethernet0/0
-C        10.0.3.0/30 is directly connected, Ethernet0/0
-
-R20#ping 10.0.2.1
-Type escape sequence to abort.
-Sending 5, 100-byte ICMP Echos to 10.0.2.1, timeout is 2 seconds:
-!!!!!
+10.0.0.0/8 is variably subnetted, 4 subnets, 3 masks
+O IA     10.0.0.0/29 [110/20] via 10.0.3.2, 17:43:21, Ethernet0/0
+O IA     10.0.1.0/29 [110/20] via 10.0.3.2, 17:43:21, Ethernet0/0
+      11.0.0.0/30 is subnetted, 1 subnets
+O E2     11.0.0.0 [110/20] via 10.0.3.2, 17:43:21, Ethernet0/0
+      12.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+O E2     12.0.0.0/30 [110/20] via 10.0.3.2, 17:43:21, Ethernet0/0
+O E2     12.12.12.12/32 [110/20] via 10.0.3.2, 17:43:21, Ethernet0/0
+      13.0.0.0/32 is subnetted, 1 subnets
+O E2     13.13.13.13 [110/20] via 10.0.3.2, 17:43:21, Ethernet0/0
+      14.0.0.0/32 is subnetted, 1 subnets
+O E2     14.14.14.14 [110/20] via 10.0.3.2, 17:43:21, Ethernet0/0
+      15.0.0.0/32 is subnetted, 1 subnets
+O E2     15.15.15.15 [110/20] via 10.0.3.2, 17:43:21, Ethernet0/0
+O IA  192.168.0.0/24 [110/30] via 10.0.3.2, 17:43:21, Ethernet0/0
+O IA  192.168.1.0/24 [110/30] via 10.0.3.2, 17:43:21, Ethernet0/0
 ```
-ТМ после фильтрации, пинг в зону 101 пропал  
+Cеть 10.0.2.0/30 недоступна из зоны 101:  
 ```
-      10.0.0.0/8 is variably subnetted, 4 subnets, 3 masks
-O IA     10.0.0.0/29 [110/20] via 10.0.3.2, 00:00:11, Ethernet0/0
-O IA     10.0.1.0/29 [110/20] via 10.0.3.2, 00:00:11, Ethernet0/0
-C        10.0.3.0/30 is directly connected, Ethernet0/0
-
 R20#ping 10.0.2.1
 Type escape sequence to abort.
 Sending 5, 100-byte ICMP Echos to 10.0.2.1, timeout is 2 seconds:
 .....
 ```
+
+
+
+
+
+
+
+
+
+
 
 
