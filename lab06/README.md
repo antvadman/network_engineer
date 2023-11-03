@@ -89,7 +89,7 @@ ip prefix-list F101 seq 30 permit 0.0.0.0/0 le 32
 router ospf 1
  distribute-list prefix F101 in
 ```
-Теперь в таблице маршрутизации отсутствует сеть 10.0.2.0/30 и дефолт:  
+Теперь в таблице маршрутизации отсутствуют записи сети 10.0.2.0/30 и дефолт:  
 ```
 10.0.0.0/8 is variably subnetted, 4 subnets, 3 masks
 O IA     10.0.0.0/29 [110/20] via 10.0.3.2, 17:43:21, Ethernet0/0
