@@ -1,7 +1,7 @@
 # Lab 07 ISIS IPv4
 
 ### Топология сети
-<image src="scheme.jpg">
+<image src="scheme.png">
 
 Задачи лабораторной работы:  
 
