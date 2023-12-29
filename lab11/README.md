@@ -71,7 +71,7 @@ Originating default network 0.0.0.0
  *>   192.168.9.0      12.0.1.2                               0 2222 2042 i
 ```
 
-[Лаба](./_lab11.zip)
+[Лаба](./lab11.zip)
 
 
 
