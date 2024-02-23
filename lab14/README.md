@@ -139,15 +139,26 @@ CA Certificate
 ```
 Теперь настраиваем туннель IPSec:
 ```
-crypto isakmp policy 10
- encr aes 256
+crypto ikev2 proposal PHASE1
+ encryption aes-cbc-128
+ integrity md5
  group 2
+crypto ikev2 policy IKEV2
+ proposal PHASE1
 
-crypto ipsec transform-set GRE-TS esp-aes 256 esp-sha-hmac
- mode transport
+crypto ikev2 profile IKEV2_PRFL
+ match address local interface Ethernet0/2
+ match identity remote address 14.0.4.1 255.255.255.252
+ authentication remote rsa-sig
+ authentication local rsa-sig
+ pki trustpoint VPN
 
-crypto ipsec profile GRE-PROF
- set transform-set GRE-TS
+crypto ipsec transform-set IKEV2_TS esp-aes esp-sha-hmac 
+mode tunnel
+
+crypto ipsec profile IPSEC_PRFL
+set transform-set IKEV2_TS
+set ikev2-profile IKEV2_PRFL
 ```
 Применяем профиль ipsec на туннельном интерфейсе:
 ```
@@ -156,7 +167,12 @@ interface Tunnel0
  ip tcp adjust-mss 1360
  tunnel source 12.0.0.2
  tunnel destination 14.0.4.1
- tunnel protection ipsec profile GRE-PROF
+ tunnel protection ipsec profile IPSEC_PRFL
+```
+Далее добавляем статические маршруты в сети назначения через туннельный интерфейс:
+```
+ip route 192.168.8.0 255.255.255.0 10.10.10.18
+ip route 192.168.9.0 255.255.255.0 10.10.10.18
 ```
 Пингуем из сети МСК станции сети в СПБ:
 ```
